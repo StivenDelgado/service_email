@@ -6,9 +6,22 @@ import { sendEmail } from "./src/util/email.js";
 
 dotenv.config();
 // Configura CORS para permitir solo un origen específico
+const allowedOrigins = [
+    "https://lvalentinaugc.vercel.app", // Tu sitio principal
+    "http://localhost:8080", // Para desarrollo local
+];
+
 const corsOptions = {
-    origin: "https://lvalentinaugc.vercel.app/", // Cambia esto por el dominio de tu frontend
+    origin: (origin, callback) => {
+        if (allowedOrigins.includes(origin) || !origin) {
+            callback(null, true); // Permitir la solicitud
+        } else {
+            callback(new Error("Origen no permitido por CORS")); // Bloquear la solicitud
+        }
+    },
     optionsSuccessStatus: 200, // Algunos navegadores requieren esto
+    allowedHeaders: ["Content-Type", "Authorization"],
+    exposedHeaders: ["Content-Type", "Authorization"],
 };
 
 const app = express();
