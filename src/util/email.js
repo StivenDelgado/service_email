@@ -12,14 +12,14 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-export async function sendEmail(subject, content, email, name) {
+export async function sendEmail(subject, message, email, name) {
     try {
         const info = await transporter.sendMail({
             from: '"LValentinaUGC" <stiven03dg@gmail.com>',
-            to: "laurabrian17@gmail.com",
+            to: "delgadostiven123@gmail.com",
             subject: subject,
-            text: content,
-            html: html(email, name, subject, content)
+            text: message,
+            html: html(email, name, subject, message)
         });
         console.log(`Correo enviado a ${"laurabrian17@gmail.com"}: ${info.messageId}`);
         return info.messageId;
@@ -29,7 +29,7 @@ export async function sendEmail(subject, content, email, name) {
     }
 }
 
-const html = (email, name, subject, content) => {
+const html = (email, name, subject, message) => {
     return  `
 <!DOCTYPE html>
 <html lang="es">
@@ -139,7 +139,7 @@ body {
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Asunto:</strong> ${subject}</p>
         <p><strong>Mensaje:</strong></p>
-        <p>${content}</p>
+        <p>${message}</p>
         <p>Gracias por utilizar <strong>LValentinaUGC</strong>.</p>
     </div>
     <div class="footer">

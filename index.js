@@ -12,10 +12,10 @@ app.use(express.json());
 
 
 app.post("/api/v1/send-email", async (req, res) => {
-    const { name, email, subject, content } = req.body;
-
+    const { name, email, subject, message } = req.body;
+    
     try {
-        const response = await sendEmail(subject, content, email, name);
+        const response = await sendEmail(subject, message, email, name);
         console.log(`Correo enviado: ${response}`);
         res.status(200).json({ message: "Correo enviado con éxito" });
     } catch (error) {
