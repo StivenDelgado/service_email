@@ -5,9 +5,14 @@ import dotenv from "dotenv";
 import { sendEmail } from "./src/util/email.js";
 
 dotenv.config();
+// Configura CORS para permitir solo un origen específico
+const corsOptions = {
+    origin: "https://lvalentinaugc.vercel.app/", // Cambia esto por el dominio de tu frontend
+    optionsSuccessStatus: 200, // Algunos navegadores requieren esto
+};
 
 const app = express();
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 
 
